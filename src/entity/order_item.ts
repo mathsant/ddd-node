@@ -18,7 +18,9 @@ export class OrderItem {
     this._price = price;
     this._productId = productId;
     this._quantity = quantity;
-    this._total = this.total();
+    this._total = this.orderItemTotal();
+
+    this.validate();
   }
 
   get id(): string {
@@ -41,7 +43,20 @@ export class OrderItem {
     return this._price;
   }
 
-  total(): number {
+  validate(): boolean {
+    if (this._id.length === 0) throw new Error("Id is required.");
+
+    if (this._name.length === 0) throw new Error("Name is required.");
+
+    if (this._productId.length === 0 || this._productId === undefined)
+      throw new Error("ProductID is required.");
+
+    if (this._price <= 0) throw new Error("Price must be greater than 0.");
+
+    return true;
+  }
+
+  orderItemTotal(): number {
     return this._price * this._quantity;
   }
 }
