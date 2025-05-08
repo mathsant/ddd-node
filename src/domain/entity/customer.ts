@@ -26,6 +26,10 @@ export class Customer {
     return this._rewardPoints;
   }
 
+  get address(): Address {
+    return this._address;
+  }
+
   validate() {
     if (this._id.length === 0) throw new Error("ID is required.");
     if (this._name.length <= 3) throw new Error("Name is invalid.");
