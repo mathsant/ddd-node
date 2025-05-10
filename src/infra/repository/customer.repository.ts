@@ -65,6 +65,8 @@ export class CustomerRepository implements CustomerRepositoryInterface {
     const customers = customerModels.map((customerModel) => {
       const customer = new Customer(customerModel.id, customerModel.name);
 
+      customer.addRewardPoints(customerModel.rewardPoints);
+
       const address = new Address(
         customerModel.street,
         customerModel.number,
@@ -73,9 +75,6 @@ export class CustomerRepository implements CustomerRepositoryInterface {
       );
 
       customer.changeAddress(address);
-
-      if (customerModel.rewardPoints)
-        customer.addRewardPoints(customerModel.rewardPoints);
 
       if (customerModel.active) customer.activate();
 

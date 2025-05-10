@@ -27,6 +27,14 @@ export class Order {
     return this._items;
   }
 
+  addNewItemToOrder(item: OrderItem): void {
+    this._items.push(item);
+  }
+
+  changeCustomerId(customerId: string): void {
+    this._customerId = customerId;
+  }
+
   validate(): boolean {
     if (this._id.length === 0) throw new Error("Id is required.");
 
