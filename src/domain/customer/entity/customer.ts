@@ -32,7 +32,7 @@ export class Customer {
 
   validate() {
     if (this._id.length === 0) throw new Error("ID is required.");
-    if (this._name.length <= 3) throw new Error("Name is invalid.");
+    if (this._name.length <= 3) throw new Error("Name is invalid");
   }
 
   changeName(name: string) {
