@@ -11,13 +11,13 @@ describe("Customer unit tests", () => {
   it("should throw error when name is empty", () => {
     expect(() => {
       new Customer("123", "");
-    }).toThrow("customer: Name is invalid");
+    }).toThrow("customer: Name is required");
   });
 
   it("should throw error when name and are is empty", () => {
     expect(() => {
       new Customer("", "");
-    }).toThrow("customer: Id is required,customer: Name is invalid");
+    }).toThrow("customer: Id is required,customer: Name is required");
   });
 
   it("should throw error when address is undefined in customer activation", () => {

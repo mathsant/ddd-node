@@ -70,6 +70,8 @@ describe("create customer unit test", () => {
       },
     };
 
-    await expect(usecase.execute(input)).rejects.toThrow("Name is invalid");
+    await expect(usecase.execute(input)).rejects.toThrow(
+      "customer: Name is required"
+    );
   });
 });
