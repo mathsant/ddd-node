@@ -7,6 +7,7 @@ import {
 } from "../../../use-case/customer/create/create.customer.dto";
 import { FindAllCustomersUseCase } from "../../../use-case/customer/findAll/find.all.customers.usecase";
 import { OutputFindAllCustomersDto } from "../../../use-case/customer/findAll/find.all.customers.dto";
+import { CustomerPresenter } from "../presenters/customer.presenter";
 
 export const customerRoute = express.Router();
 
@@ -35,11 +36,10 @@ customerRoute.post("/", async (req: Request, res: Response) => {
 customerRoute.get("/", async (req: Request, res: Response) => {
   const usecase = new FindAllCustomersUseCase(new CustomerRepository());
 
-  try {
-    const output: OutputFindAllCustomersDto = await usecase.execute();
+  const output: OutputFindAllCustomersDto = await usecase.execute();
 
-    res.send(output);
-  } catch (error) {
-    res.status(500).send(error);
-  }
+  res.format({
+    json: async () => res.send(output),
+    xml: async () => res.send(CustomerPresenter.listXML(output)),
+  });
 });

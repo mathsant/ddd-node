@@ -85,5 +85,15 @@ describe("e2e test for customer", () => {
 
     const secondCustomer = listAllResponse.body.customers[1];
     expect(secondCustomer.name).toEqual("João");
+
+    const listAllResponseXML = await request(app)
+      .get("/customer")
+      .set("Accept", "application/xml")
+      .send();
+
+    expect(listAllResponseXML.status).toBe(200);
+    expect(listAllResponseXML.text).toContain(
+      `<?xml version="1.0" encoding="UTF-8"?>`
+    );
   });
 });
